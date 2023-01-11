@@ -3,6 +3,7 @@ export default function ConfigPage() {
   return (
     <div className="config--page">
       <h1>Configration Menu</h1>
+      {/* used new form conponent for react router 6.4 to post to action specified in /game path */}
       <Form method="post" action="/game">
         <label htmlFor="amount">Number of Questions(5-20):</label>
         <input type="number" name="amount" id="amount" required min={5} max={20} placeholder={5} />
@@ -48,17 +49,25 @@ export default function ConfigPage() {
     </div>
   );
 }
+// action specifed in /game path to intercept form data and make fetch request
+// return response from fetch to be used in component at /game path
 export const myConfigration = async ({ request }) => {
   const data = await request.formData();
-  console.log(request);
-  console.log(await data);
   const configObj = {
     amount: data.get("amount"),
     category: data.get("category"),
     difficulty: data.get("difficulty"),
     type: data.get("type"),
   };
-  //   console.log(configObj);
-  return null;
-  //   return redirect("/game");
+  const getQuestions = async () => {
+    let query = `amount=${configObj.amount}`;
+    if (configObj.category) query += `&category=${configObj.category}`;
+    if (configObj.difficulty) query += `&difficulty=${configObj.difficulty}`;
+    if (configObj.type) query += `&type=${configObj.type}`;
+    console.log(`https://opentdb.com/api.php?${query}`);
+    const res = await fetch(`https://opentdb.com/api.php?${query}`);
+
+    return res.json();
+  };
+  return getQuestions();
 };

@@ -9,28 +9,30 @@
 }
 body {
   margin: 0;
-}
-.App {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primaryBase);
-  position: relative;
+}
+.App {
+  width: 100vw;
+  height: 100%;
   padding: 10px;
   font-family: "Karla";
   color: var(--primary);
+  letter-spacing: 1.2px;
 }
 .App .blob1 {
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: -1;
 }
 .App .blob2 {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: -1;
 }
 
 /* Start Page */
@@ -101,4 +103,42 @@ select {
   color: var(--primaryBase);
   border: none;
   cursor: pointer;
+}
+/* GamePage */
+.game--page {
+  z-index: 1;
+  text-align: center;
+}
+.check--btn {
+  background: var(--primaryLight);
+  margin: 10px 0;
+  border-radius: 15px;
+  width: 160px;
+  height: 50px;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--primaryBase);
+  border: none;
+  cursor: pointer;
+}
+.question--container {
+  text-align: left;
+  margin: 0 20px;
+  border-bottom: 0.8px solid #dbdef0;
+  padding: 20px;
+}
+.question {
+}
+.option {
+  cursor: pointer;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 15px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: var(--primary);
+  border: 1px solid var(--primaryLight);
+  background-color: transparent;
 }

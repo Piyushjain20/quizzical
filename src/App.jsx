@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import StartPage from "./pages/StartPage";
 import ConfigPage, { myConfigration } from "./pages/ConfigPage";
-import GamePage, { loader as questionLoader } from "./pages/GamePage";
+import GamePage from "./pages/GamePage";
 import blob1 from "./assets/blob1.svg";
 import blob2 from "./assets/blob2.svg";
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route index element={<StartPage />}></Route>
       <Route path="config" element={<ConfigPage />}></Route>
-      <Route path="game" element={<GamePage />} action={myConfigration} loader={questionLoader}></Route>
+      <Route path="game" element={<GamePage />} action={myConfigration} errorElement={<h2>Error accured !Unable to fetch data</h2>}></Route>
     </Route>
   )
 );
