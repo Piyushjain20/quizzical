@@ -1,4 +1,4 @@
-import { Form, redirect } from "react-router-dom";
+import { Form } from "react-router-dom";
 export default function ConfigPage() {
   return (
     <div className="config--page">
@@ -51,7 +51,7 @@ export default function ConfigPage() {
 }
 // action specifed in /game path to intercept form data and make fetch request
 // return response from fetch to be used in component at /game path
-export const myConfigration = async ({ request }) => {
+export const getQuesForMyConfig = async ({ request }) => {
   const data = await request.formData();
   const configObj = {
     amount: data.get("amount"),

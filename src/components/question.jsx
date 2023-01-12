@@ -1,22 +1,30 @@
-export default function Question({ question, correct_answer, incorrect_answers }) {
-  const randomIndex = Math.floor(Math.random() * incorrect_answers.length);
-  incorrect_answers.splice(randomIndex, 0, correct_answer);
+export default function Question({ object, selectOption, on }) {
+  const { id, question, optionsArray, selectedOption, correct_answer } = object;
+  function helper(option) {
+    if (option === correct_answer) return "correct option";
+    else if (option === selectedOption) return "wrong option disabled";
+    else return "option disabled";
+  }
+
+  const AllOptionsEle = optionsArray.map((option, index) => {
+    if (on) {
+      return (
+        <button key={index} className={helper(option)} onClick={() => selectOption(id, option)}>
+          {option}
+        </button>
+      );
+    }
+    return (
+      <button key={index} className={option === selectedOption ? "selected option" : "option"} onClick={() => selectOption(id, option)}>
+        {option}
+      </button>
+    );
+  });
 
   return (
     <div className="question--container">
-      <h2 className="question">{decodeHtml(question)}</h2>
-      <div>
-        {incorrect_answers.map((option, index) => (
-          <button key={index} className="option">
-            {decodeHtml(option)}
-          </button>
-        ))}
-      </div>
+      <h2 className="question">{question}</h2>
+      <div className="options--container">{AllOptionsEle}</div>
     </div>
   );
-}
-function decodeHtml(html) {
-  var txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
 }
